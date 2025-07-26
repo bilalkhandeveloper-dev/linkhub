@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Interactive Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8A82FF;
+            --secondary: #4D44DB;
+            --dark: #1E1E2E;
+            --light: #FFFFFF;
+            --gray: #A1A1AA;
+            --glass: rgba(255, 255, 255, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #1E1E2E, #2D2D42, #3A3A5A, #4D44DB);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: relative;
+        }
+        
+        /* Animated Background Elements */
+        .bg-bubble {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .bubble-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .bubble-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            bottom: 10%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+        
+        .bubble-3 {
+            width: 250px;
+            height: 250px;
+            background: #FF6584;
+            top: 50%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-img-border {
+            position: absolute;
+            width: 176px;
+            height: 176px;
+            border-radius: 50%;
+            top: -8px;
+            left: -8px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), #FF6584);
+            background-size: 200% 200%;
+            animation: gradientBorder 4s ease infinite;
+            z-index: 1;
+            filter: blur(5px);
+            opacity: 0.7;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--light), var(--gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .title {
+            font-weight: 400;
+            color: var(--primary-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+        
+        .bio {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .link-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            transform: translateY(0);
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .link-card:hover::before {
+            left: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .link-card:nth-child(1) { animation-delay: 0.2s; }
+        .link-card:nth-child(2) { animation-delay: 0.3s; }
+        .link-card:nth-child(3) { animation-delay: 0.4s; }
+        .link-card:nth-child(4) { animation-delay: 0.5s; }
+        .link-card:nth-child(5) { animation-delay: 0.6s; }
+        .link-card:nth-child(6) { animation-delay: 0.7s; }
+        .link-card:nth-child(7) { animation-delay: 0.8s; }
+        
+        .link-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: var(--light);
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .link-card:hover .link-icon {
+            background: var(--primary);
+            transform: rotate(10deg);
+        }
+        
+        .link-content {
+            flex-grow: 1;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+        
+        .link-desc {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+        
+        .link-arrow {
+            color: rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+        }
+        
+        .link-card:hover .link-arrow {
+            color: var(--light);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Animations */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .profile-img {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .profile-img-border {
+                width: 146px;
+                height: 146px;
+            }
+            
+            .link-card {
+                padding: 1.2rem;
+            }
+            
+            .link-icon {
+                width: 46px;
+                height: 46px;
+                font-size: 1.3rem;
+                margin-right: 1rem;
+            }
+            
+            .link-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-bubble bubble-1"></div>
+    <div class="bg-bubble bubble-2"></div>
+    <div class="bg-bubble bubble-3"></div>
+    
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <div class="profile-img-container">
+                <div class="profile-img-border"></div>
+                <img src="pic.jpg" alt="Hazrat Bilal" class="profile-img" id="profile-img">
+            </div>
+            <h1>Hazrat Bilal</h1>
+            <p class="title">Web Developer | UI/UX Designer</p>
+            <p class="bio">Passionate about clean code and responsive design. Skilled in HTML, CSS, JavaScript, PHP & MySQL.</p>
+        </header>
+        
+        <div class="links">
+            <a href="https://linkedin.com/in/hazrat-bilal-dev" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">LinkedIn</div>
+                    <div class="link-desc">Connect with me professionally</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="https://github.com/bilalkhandeveloper-dev" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">GitHub</div>
+                    <div class="link-desc">Explore my coding projects</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="https://drive.google.com/file/d/190JNo5QmqKizl0jOpyYJ9UGm1dnvJ2js/view?usp=sharing" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Resume</div>
+                    <div class="link-desc">Download my professional CV</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="https://twitter.com/yourhandle" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Twitter</div>
+                    <div class="link-desc">Follow my thoughts and updates</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="https://medium.com/@yourusername" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-medium-m"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Medium</div>
+                    <div class="link-desc">Read my articles and blogs</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="mailto:freelancer.hazratbilal.com" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Email</div>
+                    <div class="link-desc">Get in touch with me directly</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="https://calendly.com/yourusername" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Schedule a Meeting</div>
+                    <div class="link-desc">Book time in my calendar</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://www.instagram.com/bilal_khan5824/" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@Comp_Tricks" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://dribbble.com/freelancer-hazratbilal" class="social-link"><i class="fab fa-dribbble"></i></a>
+            <a href="https://www.behance.net/bilalportfolio" class="social-link"><i class="fab fa-behance"></i></a>
+        </div>
+        
+        <footer>
+            &copy; <span id="year"></span> Your Name. All rights reserved.
+        </footer>
+    </div>
+    
+    <script>
+        // Update year automatically
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random size between 1px and 3px
+            const size = Math.random() * 2 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            
+            // Random animation duration between 10s and 20s
+            const duration = Math.random() * 10 + 10;
+            particle.style.animationDuration = `${duration}s`;
+            
+            // Random delay
+            particle.style.animationDelay = `${Math.random() * 10}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Enhanced profile image hover effect
+        const profileImg = document.getElementById('profile-img');
+        profileImg.addEventListener('mouseenter', () => {
+            profileImg.style.transform = 'scale(1.05) rotate(5deg)';
+            profileImg.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+        });
+        
+        profileImg.addEventListener('mouseleave', () => {
+            profileImg.style.transform = 'scale(1) rotate(0deg)';
+            profileImg.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
+        });
+        
+        // Add ripple effect to link cards
+        const linkCards = document.querySelectorAll('.link-card');
+        linkCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Create ripple element
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                
+                // Position the ripple at click position
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                // Add ripple to card
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
