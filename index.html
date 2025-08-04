@@ -177,6 +177,89 @@
             margin: 0 auto 2rem;
         }
 
+        /* Social Media Icons */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.4s;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .social-icon:hover::before {
+            width: 80px;
+            height: 80px;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-hover);
+            background: var(--glass-hover);
+            border-color: rgba(0, 102, 255, 0.4);
+        }
+
+        /* Custom social colors on hover */
+        .social-icon.instagram:hover {
+            background: linear-gradient(45deg, #e4405f, #833ab4);
+            border-color: #e4405f;
+        }
+
+        .social-icon.youtube:hover {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            border-color: #ff0000;
+        }
+
+        .social-icon.dribbble:hover {
+            background: linear-gradient(45deg, #ea4c89, #d63384);
+            border-color: #ea4c89;
+        }
+
+        .social-icon.behance:hover {
+            background: linear-gradient(45deg, #1769ff, #0d47a1);
+            border-color: #1769ff;
+        }
+
+        .social-icon.medium:hover {
+            background: linear-gradient(45deg, #00ab6c, #00d4aa);
+            border-color: #00ab6c;
+        }
+
+        .social-icon.twitter:hover {
+            background: linear-gradient(45deg, #1da1f2, #0d8bd9);
+            border-color: #1da1f2;
+        }
+
         /* Links Container */
         .links-section {
             animation: fadeInUp 1s ease-out 0.2s both;
@@ -385,6 +468,16 @@
                 text-align: left;
                 justify-content: flex-start;
             }
+
+            .social-media {
+                gap: 1.2rem;
+            }
+
+            .social-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -437,6 +530,16 @@
             .content-wrapper {
                 gap: 2rem;
             }
+
+            .social-media {
+                gap: 0.8rem;
+            }
+
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -477,6 +580,22 @@
                     <h1 class="name">Hazrat Bilal</h1>
                     <p class="title">Web Developer | Graphic Designer</p>
                     <p class="bio">Creative and detail-oriented professional with 3+ years of experience in designing and developing responsive websites and visual content. Skilled in HTML, CSS, PHP, WordPress, and MySQL to build dynamic web solutions, and proficient in Adobe Photoshop, Illustrator, and Canva to craft engaging graphics, logos, and UI designs.</p>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="social-media">
+                        <a href="https://www.instagram.com/bilal_khan5824/" class="social-icon instagram" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@Comp_Tricks" class="social-icon youtube" target="_blank" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://dribbble.com/freelancer-hazratbilal" class="social-icon dribbble" target="_blank" title="Dribbble">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="https://www.behance.net/bilalportfolio" class="social-icon behance" target="_blank" title="Behance">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -608,7 +727,6 @@
         // Initialize particles
         createParticles();
 
-
         // Add click animation without affecting scroll
         document.querySelectorAll('.link-item').forEach(item => {
             item.addEventListener('click', function(e) {
@@ -620,7 +738,7 @@
         });
 
         // Add ripple effect on click
-        document.querySelectorAll('.link-item').forEach(item => {
+        document.querySelectorAll('.link-item, .social-icon').forEach(item => {
             item.addEventListener('click', function(e) {
                 const ripple = document.createElement('span');
                 const rect = this.getBoundingClientRect();
@@ -676,6 +794,17 @@
 
         profileImage.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1) rotate(0deg)';
+        });
+
+        // Social icons hover effects
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.1) rotate(5deg)';
+            });
+
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+            });
         });
 
         // Add keyboard navigation support
