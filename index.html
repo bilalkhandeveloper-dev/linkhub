@@ -177,99 +177,6 @@
             margin: 0 auto 2rem;
         }
 
-        /* Stats */
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 102, 255, 0.2);
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .stat-item {
-            text-align: center;
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            margin-top: 0.2rem;
-        }
-
-        /* Additional Info Section */
-        .additional-info {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 102, 255, 0.2);
-            text-align: left;
-        }
-
-        .info-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-list {
-            list-style: none;
-            space-y: 0.5rem;
-        }
-
-        .info-list li {
-            color: var(--text-gray);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-list li i {
-            color: var(--accent-color);
-            width: 16px;
-        }
-
-        .education-item {
-            margin-bottom: 1rem;
-        }
-
-        .education-item h4 {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .education-details {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-achievement {
-            color: var(--accent-color);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
         /* Links Container */
         .links-section {
             animation: fadeInUp 1s ease-out 0.2s both;
@@ -440,18 +347,16 @@
             }
         }
 
-        /* Desktop Two-Column Layout - FIXED */
+        /* Desktop Two-Column Layout */
         @media (min-width: 768px) {
             .content-wrapper {
-                grid-template-columns: 420px 1fr; /* Fixed width for left column */
+                grid-template-columns: 420px 1fr;
                 gap: 4rem;
                 align-items: start;
             }
 
             .profile-column {
-                /* Remove sticky positioning to prevent overlap issues */
                 position: relative;
-                max-height: none;
             }
 
             .profile-section {
@@ -460,7 +365,6 @@
                 border-radius: 20px;
                 padding: 2rem;
                 border: 1px solid rgba(0, 102, 255, 0.1);
-                margin-bottom: 2rem;
             }
 
             .name {
@@ -481,28 +385,17 @@
                 text-align: left;
                 justify-content: flex-start;
             }
-
-            .additional-info {
-                margin-top: 1.5rem;
-                background: rgba(10, 10, 10, 0.8);
-                backdrop-filter: blur(10px);
-            }
-
-            /* Ensure proper spacing for links section */
-            .links-section {
-                min-height: 100vh;
-            }
         }
 
         @media (min-width: 1024px) {
             .content-wrapper {
                 gap: 5rem;
-                grid-template-columns: 450px 1fr; /* Slightly wider left column */
+                grid-template-columns: 450px 1fr;
             }
 
             .main-container {
                 padding: 3rem;
-                max-width: 1600px; /* Increased max width */
+                max-width: 1600px;
             }
         }
 
@@ -541,18 +434,6 @@
                 font-size: 1.3rem;
             }
 
-            .stats {
-                padding: 1rem;
-            }
-
-            .stat-number {
-                font-size: 1.5rem;
-            }
-
-            .additional-info {
-                padding: 1.2rem;
-            }
-
             .content-wrapper {
                 gap: 2rem;
             }
@@ -562,22 +443,6 @@
             .main-container {
                 padding: 1rem;
             }
-
-            .stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .stat-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.5rem 0;
-            }
-
-            .stat-number {
-                font-size: 1.3rem;
-            }
         }
 
         /* Scroll behavior improvements */
@@ -585,7 +450,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Ensure no content is hidden behind fixed elements */
         .profile-column {
             position: relative;
             z-index: 1;
@@ -614,72 +478,6 @@
                     <p class="title">Web Developer | Graphic Designer</p>
                     <p class="bio">Creative and detail-oriented professional with 3+ years of experience in designing and developing responsive websites and visual content. Skilled in HTML, CSS, PHP, WordPress, and MySQL to build dynamic web solutions, and proficient in Adobe Photoshop, Illustrator, and Canva to craft engaging graphics, logos, and UI designs.</p>
                 </div>
-
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number">7+</span>
-                        <span class="stat-label">Projects</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">3.73</span>
-                        <span class="stat-label">CGPA</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">3+</span>
-                        <span class="stat-label">Years Exp</span>
-                    </div>
-                </div>
-
-                <div class="additional-info">
-                    <h3 class="info-title">
-                        <i class="fas fa-graduation-cap"></i>
-                        Education
-                    </h3>
-                    <div class="education-item">
-                        <h4>Bachelor's in Computer Science</h4>
-                        <p class="education-details">University of Malakand | 2021 - 2025 | CGPA: 3.73/4.0</p>
-                        <p class="education-achievement">🏆 HEEF Scholarship recipient (3 times) | Top student with free laptop award</p>
-                    </div>
-                </div>
-
-                <div class="additional-info">
-                    <h3 class="info-title">
-                        <i class="fas fa-code"></i>
-                        Technical Skills
-                    </h3>
-                    <ul class="info-list">
-                        <li><i class="fas fa-laptop-code"></i> HTML, CSS, JavaScript, PHP, MySQL, Bootstrap</li>
-                        <li><i class="fas fa-paint-brush"></i> Adobe Photoshop, Illustrator, Canva</li>
-                        <li><i class="fas fa-server"></i> WordPress, GitHub, Visual Studio Code</li>
-                        <li><i class="fas fa-desktop"></i> MS Office, IT Support, Windows Installation</li>
-                    </ul>
-                </div>
-
-                <div class="additional-info">
-                    <h3 class="info-title">
-                        <i class="fas fa-user-cog"></i>
-                        Soft Skills
-                    </h3>
-                    <ul class="info-list">
-                        <li><i class="fas fa-users"></i> Teamwork & Communication</li>
-                        <li><i class="fas fa-clock"></i> Time Management & Self-Motivation</li>
-                        <li><i class="fas fa-eye"></i> Attention to Detail & Creativity</li>
-                        <li><i class="fas fa-sync-alt"></i> Adaptability & Problem Solving</li>
-                    </ul>
-                </div>
-
-                <div class="additional-info">
-                    <h3 class="info-title">
-                        <i class="fas fa-certificate"></i>
-                        Certificates & Languages
-                    </h3>
-                    <ul class="info-list">
-                        <li><i class="fas fa-award"></i> Web Development – NFTP (2022)</li>
-                        <li><i class="fas fa-trophy"></i> Digital Marketing Bootcamp</li>
-                        <li><i class="fas fa-flask"></i> Science Exhibition Participation</li>
-                        <li><i class="fas fa-globe"></i> English, Urdu (Native), Pashto (Native)</li>
-                    </ul>
-                </div>
             </div>
 
             <!-- Right Column: Links -->
@@ -690,7 +488,7 @@
                 </h2>
                 
                 <div class="links-container">
-                    <a href="https://bkdesigns20.github.io/portfolio/" class="link-item portfolio" target="_blank">
+                    <a href="https://hbilalcode.github.io/portfolio/" class="link-item portfolio" target="_blank">
                         <div class="link-icon">
                             <i class="fas fa-briefcase"></i>
                         </div>
@@ -712,7 +510,7 @@
                         <i class="fas fa-chevron-right link-arrow"></i>
                     </a>
 
-                    <a href="https://fiverr.com/hazratbilaldev" class="link-item fiverr" target="_blank">
+                    <a href="https://www.fiverr.com/bkdesigns20/" class="link-item fiverr" target="_blank">
                         <div class="link-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
@@ -723,7 +521,7 @@
                         <i class="fas fa-chevron-right link-arrow"></i>
                     </a>
 
-                    <a href="https://github.com/bkdesigns20" class="link-item github" target="_blank">
+                    <a href="https://github.com/hbilalcode" class="link-item github" target="_blank">
                         <div class="link-icon">
                             <i class="fab fa-github"></i>
                         </div>
@@ -756,7 +554,7 @@
                         <i class="fas fa-chevron-right link-arrow"></i>
                     </a>
 
-                    <a href="#resume" class="link-item resume" onclick="downloadResume()">
+                    <a href="https://drive.google.com/file/d/105al2KqNG3R-ymZ90e1tfWBNe2OJJaCh/view?usp=sharing" class="link-item resume" onclick="downloadResume()">
                         <div class="link-icon">
                             <i class="fas fa-file-alt"></i>
                         </div>
@@ -911,9 +709,9 @@
 
         // Preload important resources
         const links = [
-            'https://bkdesigns20.github.io/portfolio/',
+            'https://hbilalcode.github.io/portfolio/',
             'https://linkedin.com/in/hazrat-bilal-dev',
-            'https://github.com/bkdesigns20'
+            'https://github.com/hbilalcode'
         ];
 
         links.forEach(url => {
