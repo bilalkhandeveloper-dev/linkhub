@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Interactive Hub</title>
+    <title>Hazrat Bilal | Interactive Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6C63FF;
-            --primary-light: #8A82FF;
-            --secondary: #4D44DB;
-            --dark: #1E1E2E;
-            --light: #FFFFFF;
-            --gray: #A1A1AA;
-            --glass: rgba(255, 255, 255, 0.15);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --pink: #ec4899;
+            --dark: #0f0f23;
+            --dark-light: #1e1e3f;
+            --light: #ffffff;
+            --gray: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.2);
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.2);
         }
         
         * {
@@ -30,52 +37,81 @@
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
-            background: linear-gradient(-45deg, #1E1E2E, #2D2D42, #3A3A5A, #4D44DB);
+            background: linear-gradient(-45deg, var(--dark), var(--dark-light), #2d1b69, var(--primary));
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            animation: gradientBG 20s ease infinite;
             position: relative;
         }
         
-        /* Animated Background Elements */
+        /* Enhanced Background Elements */
         .bg-bubble {
             position: absolute;
             border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.15;
-            animation: float 15s infinite ease-in-out;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 20s infinite ease-in-out;
         }
         
         .bubble-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: 10%;
-            left: 5%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--pink));
+            top: 5%;
+            left: -10%;
             animation-delay: 0s;
         }
         
         .bubble-2 {
-            width: 400px;
-            height: 400px;
-            background: var(--secondary);
-            bottom: 10%;
-            right: 5%;
-            animation-delay: 2s;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            bottom: 5%;
+            right: -15%;
+            animation-delay: 3s;
         }
         
         .bubble-3 {
-            width: 250px;
-            height: 250px;
-            background: #FF6584;
-            top: 50%;
-            left: 30%;
-            animation-delay: 4s;
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(225deg, var(--success), var(--primary-light));
+            top: 40%;
+            left: 50%;
+            animation-delay: 6s;
+        }
+        
+        .bubble-4 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(315deg, var(--pink), var(--primary));
+            top: 70%;
+            left: 10%;
+            animation-delay: 9s;
+        }
+        
+        /* Enhanced Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary), var(--pink));
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
         }
         
         .container {
-            max-width: 900px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
             position: relative;
             z-index: 1;
         }
@@ -83,7 +119,7 @@
         header {
             text-align: center;
             margin-bottom: 3rem;
-            animation: fadeIn 1s ease;
+            animation: fadeInUp 1s ease 0.2s both;
         }
         
         .profile-img-container {
@@ -93,86 +129,90 @@
         }
         
         .profile-img {
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
             z-index: 2;
         }
         
         .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-hover);
         }
         
         .profile-img-border {
             position: absolute;
-            width: 176px;
-            height: 176px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            top: -8px;
-            left: -8px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), #FF6584);
-            background-size: 200% 200%;
-            animation: gradientBorder 4s ease infinite;
+            top: -10px;
+            left: -10px;
+            background: linear-gradient(45deg, var(--primary), var(--pink), var(--secondary), var(--accent));
+            background-size: 400% 400%;
+            animation: gradientBorder 6s ease infinite;
             z-index: 1;
-            filter: blur(5px);
-            opacity: 0.7;
+            filter: blur(10px);
+            opacity: 0.8;
         }
         
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(to right, var(--light), var(--gray));
+            background: linear-gradient(135deg, var(--light), var(--primary-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .title {
-            font-weight: 400;
+            font-weight: 500;
             color: var(--primary-light);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .bio {
-            max-width: 600px;
-            margin: 0 auto 2rem;
             color: var(--gray);
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .links {
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1rem;
             margin-bottom: 3rem;
         }
         
         .link-card {
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
             padding: 1.5rem;
             display: flex;
             align-items: center;
             text-decoration: none;
             color: var(--light);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: var(--transition);
             transform: translateY(0);
             opacity: 0;
-            animation: slideUp 0.6s ease forwards;
+            animation: slideUp 0.8s ease forwards;
             position: relative;
             overflow: hidden;
         }
@@ -184,8 +224,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.6s;
         }
         
         .link-card:hover::before {
@@ -193,39 +233,70 @@
         }
         
         .link-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            background: var(--glass-hover);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
-        .link-card:nth-child(1) { animation-delay: 0.2s; }
-        .link-card:nth-child(2) { animation-delay: 0.3s; }
-        .link-card:nth-child(3) { animation-delay: 0.4s; }
-        .link-card:nth-child(4) { animation-delay: 0.5s; }
-        .link-card:nth-child(5) { animation-delay: 0.6s; }
-        .link-card:nth-child(6) { animation-delay: 0.7s; }
-        .link-card:nth-child(7) { animation-delay: 0.8s; }
+        /* Staggered animation delays */
+        .link-card:nth-child(1) { animation-delay: 0.4s; }
+        .link-card:nth-child(2) { animation-delay: 0.6s; }
+        .link-card:nth-child(3) { animation-delay: 0.8s; }
+        .link-card:nth-child(4) { animation-delay: 1.0s; }
+        .link-card:nth-child(5) { animation-delay: 1.2s; }
+        .link-card:nth-child(6) { animation-delay: 1.4s; }
+        .link-card:nth-child(7) { animation-delay: 1.6s; }
         
         .link-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 1.5rem;
             color: var(--light);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             flex-shrink: 0;
             transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+            opacity: 0;
+        }
+        
+        .link-card:hover .link-icon::before {
+            opacity: 1;
+            animation: shine 0.5s ease;
         }
         
         .link-card:hover .link-icon {
-            background: var(--primary);
-            transform: rotate(10deg);
+            transform: rotate(-5deg) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
+        
+        /* Custom colors for different platforms */
+        .linkedin .link-icon { background: linear-gradient(135deg, #0077b5, #00a0dc); }
+        .github .link-icon { background: linear-gradient(135deg, #333, #555); }
+        .portfolio .link-icon { background: linear-gradient(135deg, var(--accent), #f97316); }
+        .resume .link-icon { background: linear-gradient(135deg, #dc2626, #ef4444); }
+        .medium .link-icon { background: linear-gradient(135deg, #00ab6c, #00d4aa); }
+        .email .link-icon { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+        .calendar .link-icon { background: linear-gradient(135deg, var(--success), #34d399); }
         
         .link-content {
             flex-grow: 1;
@@ -234,68 +305,110 @@
         .link-title {
             font-weight: 600;
             margin-bottom: 0.3rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            color: var(--light);
         }
         
         .link-desc {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--gray);
+            opacity: 0.9;
         }
         
         .link-arrow {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
             transition: var(--transition);
+            font-size: 1.2rem;
         }
         
         .link-card:hover .link-arrow {
             color: var(--light);
-            transform: translateX(5px);
+            transform: translateX(8px) scale(1.2);
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 3rem;
+            animation: fadeInUp 1s ease 1.8s both;
         }
         
         .social-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
             background: var(--glass);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--light);
-            font-size: 1.3rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1.4rem;
+            box-shadow: var(--shadow);
             transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .social-link:hover::before {
+            width: 100px;
+            height: 100px;
         }
         
         .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: var(--shadow-hover);
+            background: var(--glass-hover);
         }
+        
+        /* Custom social colors */
+        .social-link.instagram:hover { background: linear-gradient(45deg, #e4405f, #833ab4); }
+        .social-link.youtube:hover { background: linear-gradient(45deg, #ff0000, #cc0000); }
+        .social-link.dribbble:hover { background: linear-gradient(45deg, #ea4c89, #d63384); }
+        .social-link.behance:hover { background: linear-gradient(45deg, #1769ff, #0d47a1); }
         
         footer {
             text-align: center;
             margin-top: 4rem;
             color: var(--gray);
             font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            padding: 1rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1s ease 2s both;
         }
         
-        /* Animations */
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+        }
+        
+        /* Enhanced Animations */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -309,20 +422,16 @@
         }
         
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            33% { transform: translateY(-30px) translateX(20px) rotate(5deg); }
+            66% { transform: translateY(20px) translateX(-15px) rotate(-3deg); }
+            100% { transform: translateY(0) translateX(0) rotate(0deg); }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
+        @keyframes fadeInUp {
             from { 
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to { 
                 opacity: 1;
@@ -330,27 +439,20 @@
             }
         }
         
-        /* Particle Background */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: floatParticle linear infinite;
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         
         @keyframes floatParticle {
             0% {
-                transform: translateY(0) translateX(0);
+                transform: translateY(100vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
             10% {
@@ -360,15 +462,28 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) translateX(100px);
+                transform: translateY(-20vh) translateX(200px) rotate(360deg);
                 opacity: 0;
             }
+        }
+        
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem;
+                padding: 1.5rem 1rem;
+                max-width: 100%;
             }
             
             h1 {
@@ -376,37 +491,66 @@
             }
             
             .profile-img {
-                width: 130px;
-                height: 130px;
+                width: 120px;
+                height: 120px;
             }
             
             .profile-img-border {
-                width: 146px;
-                height: 146px;
+                width: 140px;
+                height: 140px;
+            }
+            
+            .link-card {
+                padding: 1.3rem;
+            }
+            
+            .link-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                margin-right: 1.2rem;
+            }
+            
+            .social-links {
+                gap: 0.8rem;
+            }
+            
+            .social-link {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
             }
             
             .link-card {
                 padding: 1.2rem;
             }
             
-            .link-icon {
-                width: 46px;
-                height: 46px;
-                font-size: 1.3rem;
-                margin-right: 1rem;
+            .link-title {
+                font-size: 1rem;
             }
             
-            .link-title {
-                font-size: 1.1rem;
+            .link-desc {
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background Elements -->
+    <!-- Enhanced Background Elements -->
     <div class="bg-bubble bubble-1"></div>
     <div class="bg-bubble bubble-2"></div>
     <div class="bg-bubble bubble-3"></div>
+    <div class="bg-bubble bubble-4"></div>
     
     <!-- Particle Background -->
     <div class="particles" id="particles"></div>
@@ -415,15 +559,15 @@
         <header>
             <div class="profile-img-container">
                 <div class="profile-img-border"></div>
-                <img src="pic.jpg" alt="Hazrat Bilal" class="profile-img" id="profile-img">
+                <img src="https://via.placeholder.com/140x140/6366f1/ffffff?text=HB" alt="Hazrat Bilal" class="profile-img" id="profile-img">
             </div>
             <h1>Hazrat Bilal</h1>
-            <p class="title">Web Developer | UI/UX Designer</p>
-            <p class="bio">Passionate about clean code and responsive design. Skilled in HTML, CSS, JavaScript, PHP & MySQL.</p>
+            <p class="title">Web Developer | Graphic Designer</p>
+            <p class="bio">Creative professional with 3+ years of experience in web development and graphic design. Passionate about clean code and beautiful design.</p>
         </header>
         
         <div class="links">
-            <a href="https://linkedin.com/in/hazrat-bilal-dev" class="link-card" target="_blank">
+            <a href="https://linkedin.com/in/hazrat-bilal-dev" class="link-card linkedin" target="_blank">
                 <div class="link-icon">
                     <i class="fab fa-linkedin-in"></i>
                 </div>
@@ -434,7 +578,7 @@
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
             
-            <a href="https://github.com/bilalkhandeveloper-dev" class="link-card" target="_blank">
+            <a href="https://github.com/bkdesigns20" class="link-card github" target="_blank">
                 <div class="link-icon">
                     <i class="fab fa-github"></i>
                 </div>
@@ -445,7 +589,18 @@
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
             
-            <a href="https://drive.google.com/file/d/190JNo5QmqKizl0jOpyYJ9UGm1dnvJ2js/view?usp=sharing" class="link-card" target="_blank">
+            <a href="https://bkdesigns20.github.io/portfolio/" class="link-card portfolio" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Portfolio</div>
+                    <div class="link-desc">View my complete work showcase</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            
+            <a href="https://drive.google.com/file/d/190JNo5QmqKizl0jOpyYJ9UGm1dnvJ2js/view?usp=sharing" class="link-card resume" target="_blank">
                 <div class="link-icon">
                     <i class="fas fa-file-alt"></i>
                 </div>
@@ -456,18 +611,7 @@
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
             
-            <a href="https://twitter.com/yourhandle" class="link-card" target="_blank">
-                <div class="link-icon">
-                    <i class="fab fa-twitter"></i>
-                </div>
-                <div class="link-content">
-                    <div class="link-title">Twitter</div>
-                    <div class="link-desc">Follow my thoughts and updates</div>
-                </div>
-                <i class="fas fa-chevron-right link-arrow"></i>
-            </a>
-            
-            <a href="https://medium.com/@yourusername" class="link-card" target="_blank">
+            <a href="https://medium.com/@freelancer.hazratbilal" class="link-card medium" target="_blank">
                 <div class="link-icon">
                     <i class="fab fa-medium-m"></i>
                 </div>
@@ -478,7 +622,7 @@
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
             
-            <a href="mailto:freelancer.hazratbilal.com" class="link-card" target="_blank">
+            <a href="mailto:freelancer.hazratbilal@gmail.com" class="link-card email">
                 <div class="link-icon">
                     <i class="fas fa-envelope"></i>
                 </div>
@@ -489,7 +633,7 @@
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
             
-            <a href="https://calendly.com/yourusername" class="link-card" target="_blank">
+            <a href="https://calendly.com/hazratbilal" class="link-card calendar" target="_blank">
                 <div class="link-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
@@ -502,14 +646,25 @@
         </div>
         
         <div class="social-links">
-            <a href="https://www.instagram.com/bilal_khan5824/" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@Comp_Tricks" class="social-link"><i class="fab fa-youtube"></i></a>
-            <a href="https://dribbble.com/freelancer-hazratbilal" class="social-link"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.behance.net/bilalportfolio" class="social-link"><i class="fab fa-behance"></i></a>
+            <a href="https://www.instagram.com/bilal_khan5824/" class="social-link instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@Comp_Tricks" class="social-link youtube" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://dribbble.com/freelancer-hazratbilal" class="social-link dribbble" target="_blank">
+                <i class="fab fa-dribbble"></i>
+            </a>
+            <a href="https://www.behance.net/bilalportfolio" class="social-link behance" target="_blank">
+                <i class="fab fa-behance"></i>
+            </a>
         </div>
         
         <footer>
-            &copy; <span id="year"></span> Your Name. All rights reserved.
+            &copy; <span id="year"></span> Hazrat Bilal. All rights reserved.<br>
+            <small style="opacity: 0.7; margin-top: 0.5rem; display: inline-block;">
+                Available for freelance, part-time, and full-time opportunities
+            </small>
         </footer>
     </div>
     
@@ -517,16 +672,16 @@
         // Update year automatically
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Create floating particles
+        // Create enhanced floating particles
         const particlesContainer = document.getElementById('particles');
-        const particleCount = 30;
+        const particleCount = 40;
         
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            // Random size between 1px and 3px
-            const size = Math.random() * 2 + 1;
+            // Random size between 2px and 6px
+            const size = Math.random() * 4 + 2;
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             
@@ -534,29 +689,34 @@
             particle.style.left = `${Math.random() * 100}vw`;
             particle.style.top = `${Math.random() * 100}vh`;
             
-            // Random animation duration between 10s and 20s
-            const duration = Math.random() * 10 + 10;
+            // Random animation duration between 15s and 25s
+            const duration = Math.random() * 10 + 15;
             particle.style.animationDuration = `${duration}s`;
             
             // Random delay
-            particle.style.animationDelay = `${Math.random() * 10}s`;
+            particle.style.animationDelay = `${Math.random() * 15}s`;
             
             particlesContainer.appendChild(particle);
         }
         
         // Enhanced profile image hover effect
         const profileImg = document.getElementById('profile-img');
+        let hoverTimeout;
+        
         profileImg.addEventListener('mouseenter', () => {
-            profileImg.style.transform = 'scale(1.05) rotate(5deg)';
-            profileImg.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+            clearTimeout(hoverTimeout);
+            profileImg.style.transform = 'scale(1.1) rotate(5deg)';
+            profileImg.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.3)';
         });
         
         profileImg.addEventListener('mouseleave', () => {
-            profileImg.style.transform = 'scale(1) rotate(0deg)';
-            profileImg.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
+            hoverTimeout = setTimeout(() => {
+                profileImg.style.transform = 'scale(1) rotate(0deg)';
+                profileImg.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.1)';
+            }, 100);
         });
         
-        // Add ripple effect to link cards
+        // Enhanced ripple effect for link cards
         const linkCards = document.querySelectorAll('.link-card');
         linkCards.forEach(card => {
             card.addEventListener('click', function(e) {
@@ -568,17 +728,103 @@
                 const rect = this.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
+                const size = Math.max(rect.width, rect.height);
+                
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x - size / 2}px`;
+                ripple.style.top = `${y - size / 2}px`;
                 
                 // Add ripple to card
                 this.appendChild(ripple);
                 
                 // Remove ripple after animation
                 setTimeout(() => {
-                    ripple.remove();
-                }, 1000);
+                    if (ripple.parentNode) {
+                        ripple.remove();
+                    }
+                }, 600);
             });
+        });
+        
+        // Add parallax effect to background bubbles
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const bubbles = document.querySelectorAll('.bg-bubble');
+            
+            bubbles.forEach((bubble, index) => {
+                const speed = 0.5 + (index * 0.1);
+                bubble.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        
+        // Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-nav');
+            }
+        });
+        
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-nav');
+        });
+        
+        // Performance optimization: Use requestAnimationFrame for smooth animations
+        let ticking = false;
+        
+        function updateAnimations() {
+            // Update any ongoing animations here
+            ticking = false;
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateAnimations);
+                ticking = true;
+            }
+        }
+        
+        // Add intersection observer for performance
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.link-card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
